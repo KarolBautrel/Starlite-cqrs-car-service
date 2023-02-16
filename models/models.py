@@ -1,4 +1,4 @@
-from starlite_project.db_config import Base
+from db_config import Base
 from pydantic import BaseModel
 from sqlalchemy import Column, ForeignKey, Integer, String, Float
 from sqlalchemy.orm import Mapped, Session, declarative_base, relationship
@@ -18,4 +18,4 @@ class Car(Base):
 
 
 CarDTO = dto_factory("CarDTO", Car)
-CarNoIdDTO = dto_factory("CarDTO", Car, exclude=["id"])
+CarNoIdDTO = dto_factory("CarNoIdDTO", Car, exclude=["id"])

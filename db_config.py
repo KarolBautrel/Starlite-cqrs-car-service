@@ -1,5 +1,5 @@
-from sqlalchemy import Column, ForeignKey, Integer, String, create_engine, select
-from sqlalchemy.orm import Mapped, Session, declarative_base, relationship
+from sqlalchemy import  create_engine
+from sqlalchemy.orm import  declarative_base
 
 from starlite.plugins.sql_alchemy import SQLAlchemyConfig, SQLAlchemyPlugin
 
