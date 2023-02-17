@@ -5,4 +5,4 @@ class Car(BaseModel):
     model:str
     name:str
     year:int
-    pice:int
+    price:int
