@@ -7,20 +7,6 @@ from starlite.plugins.sql_alchemy import SQLAlchemyPlugin
 dto_factory = DTOFactory(plugins=[SQLAlchemyPlugin()])
 
 
-class Car(Base):
-    __tablename__ = "car"
-    id: Mapped[int] = Column(Integer, primary_key=True)
-    model: Mapped[str] = Column(String)
-    name: Mapped[str] = Column(String)
-    year: Mapped[int] = Column(Integer)
-    price: Mapped[float] = Column(Float)
-
-
-CarDTO = dto_factory("CarDTO", Car)
-CarNoIdDTO = dto_factory("CarNoIdDTO", Car, exclude=["id"])
-
-
-
 class CarCreated(Base):
     __tablename__ = "carCreated"
     id: Mapped[str] = Column(String, primary_key=True)

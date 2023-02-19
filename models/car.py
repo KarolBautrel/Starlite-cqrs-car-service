@@ -8,7 +8,7 @@ from starlite import HTTPException
 from datetime import datetime
 from events.car_events import car_events
 from utils.car_utlis import CarUtils
-
+from read_models.car import Car as ReadModelCar
 class Car:
     def __init__(self, id: int = None, car_id: int = None):
         self.car_utils = CarUtils()
@@ -21,7 +21,7 @@ class Car:
         self.year: int = None
         self.price: float = None
         self.created = None
-
+        self.read_model = None
     def apply(self, event):
         if event.__class__.__name__ == "CarCreated":
             self.id = event.id
@@ -43,9 +43,19 @@ class Car:
                 raise HTTPException(status_code=status_codes.HTTP_404_NOT_FOUND)
             self.price = event.change
 
+
+    def check_if_car_exist(self, car_id):
+        possible_car = self.db_session.query(Car).filter(Car.id == car_id).first()
+        if possible_car:
+            self.read_model = possible_car
+            return None
+        return True
     def create_car(
         self, id: int, car_id: int, model: str, name: str, year: int, price: float
     ):
+        if not self.check_if_car_exist(car_id):
+            return
+
         created_car = CarCreated(
             id=id,
             car_id=car_id,
@@ -73,3 +83,13 @@ class Car:
         self.db_session.add(car_price_change)
         self.db_session.commit()
         self.apply(car_price_change)
+        if self.read_model:
+            self.update_car_readmodel()
+
+
+    def update_car_readmodel(self):
+        self.read_model.model = self.model
+        self.read_model.price = self.price
+        self.read_model.year = self.year
+        self.read_model.name = self.name
+        self.db_session.commit(self.read_model)
