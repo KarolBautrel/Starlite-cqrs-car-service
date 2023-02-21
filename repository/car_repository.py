@@ -1,10 +1,11 @@
 
-from models.car import Car
 from sqlalchemy.orm import sessionmaker
 from db_config import engine
-from events.car_events import car_events
+from events_storage.car_events import car_events
 from utils.car_utlis import CarUtils
-from read_models.car import Car as ReadModelCar
+from read_models.car import Car as ReadModelCar, Car
+
+
 class CarRepository:
     def __init__(self):
         Session = sessionmaker(bind=engine)

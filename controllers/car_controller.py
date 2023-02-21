@@ -1,7 +1,6 @@
-from starlite import Controller, get, patch, Response
+from starlite import Controller, get, patch, Response, post
 from services.car.car_command_service import CarCommandService
 from services.car.car_query_service import CarQueryService
-from sqlalchemy.orm import Session
 from starlite import status_codes
 from schemas.schemas import  Car
 from typing import List
@@ -24,3 +23,6 @@ class CarController(Controller):
 
         return car
 
+    @post(path="/{car_id:int}", status_code=status_codes.HTTP_200_OK)
+    def buy_car(self, car_id:int) -> None:
+        CarCommandService().buy_car(car_id)

@@ -18,6 +18,6 @@ class RedisHandler:
         self.redis_service.lrem_list(RedisKeys.EVENTS.value, json.dumps(element))
 
     def publish_event(self, event):
-        serialized_event = json.dumps(event)
+        serialized_event = json.dumps(event, default=str)
 
         self.redis_service.lpush_to_list(key = RedisKeys.EVENTS.value,value= serialized_event )

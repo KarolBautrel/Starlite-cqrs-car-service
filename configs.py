@@ -5,6 +5,6 @@ REDIS_HOST = os.environ.get("REDIS_HOST", "localhost")
 
 
 class RedisKeys(Enum):
-    EVENTS = "events"
+    EVENTS = "events_storage"
 
 

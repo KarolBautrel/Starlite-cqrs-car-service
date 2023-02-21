@@ -1,10 +1,9 @@
 from starlite import Starlite
 from db_config import Base, engine, sqlalchemy_plugin, engine
 from sqlalchemy.orm import Session
-from events.car_events import CarCreated
 from controllers.car_controller import CarController
 from datetime import datetime
-from uuid import uuid4
+from events_storage.car_events import CarCreated
 from read_models.car import Car
 def on_startup() -> None:
     """Initialize the database."""
@@ -12,39 +11,35 @@ def on_startup() -> None:
     Base.metadata.create_all(engine)
     # with Session(engine) as session:
     #     car_creation_event1 = CarCreated(
-    #         id=str(uuid4()),
     #         car_id=2,
     #         model="Opel",
     #         name="Astra",
     #         year=2008,
     #         price=25000,
     #         created=datetime.now(),
-    #         sequence_number = 1
+    #
     #     )
     #     car_creation_event2 = CarCreated(
-    #         id=str(uuid4()),
+    #
     #         car_id=3,
     #         model="Ford",
     #         name="Mustang",
     #         year=2015,
     #         price=45000,
     #         created=datetime.now(),
-    #         sequence_number=1
     #
     #     )
     #     car_creation_event3 = CarCreated(
-    #         id=str(uuid4()),
     #         car_id=4,
     #         model="Renault",
     #         name="Clio",
     #         year=2003,
     #         price=22000,
     #         created=datetime.now(),
-    #         sequence_number=1
     #
     #     )
     #     car1 = Car(
-    #         id = car_creation_event1.car_id,
+    #         id = car_creation_event1.id,
     #         model = "Opel",
     #         name = "Astra",
     #         year = 2008,
@@ -52,7 +47,7 @@ def on_startup() -> None:
     #         created = datetime.now(),
     #     )
     #     car2 = Car(
-    #         id = car_creation_event2.car_id,
+    #         id = car_creation_event2.id,
     #         model="Ford",
     #         name="Mustang",
     #         year=2015,
@@ -60,7 +55,7 @@ def on_startup() -> None:
     #         created=datetime.now(),
     #     )
     #     car3 = Car(
-    #         id = car_creation_event3.car_id,
+    #         id = car_creation_event3.id,
     #         model="Renault",
     #         name="Clio",
     #         year=2003,
