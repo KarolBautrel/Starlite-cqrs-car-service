@@ -2,7 +2,6 @@
 from sqlalchemy.orm import sessionmaker
 from db_config import engine
 from events_storage.car_events import car_events
-from utils.car_utlis import CarUtils
 from read_models.car import Car as ReadModelCar, Car
 
 
@@ -10,7 +9,6 @@ class CarRepository:
     def __init__(self):
         Session = sessionmaker(bind=engine)
         self.db_session = Session()
-        self.car_utils = CarUtils()
     def save(self, car: Car):
         pass
 

@@ -21,6 +21,12 @@ class CarBought(Base):
     id: Mapped[int] = Column(Integer, primary_key=True, autoincrement=True)
     car_id: Mapped[int] = Column(Integer, unique=True)
     created: DateTime = Column(DateTime, nullable=True)
+
+class CarCancelled(Base):
+    __tablename__ = "carBought"
+    id: Mapped[int] = Column(Integer, primary_key=True, autoincrement=True)
+    car_id: Mapped[int] = Column(Integer, unique=True)
+    created: DateTime = Column(DateTime, nullable=True)
 class CarPriceChanged(Base):
     __tablename__ = "CarPriceChanged"
     id = Column(Integer, primary_key=True, autoincrement=True)
