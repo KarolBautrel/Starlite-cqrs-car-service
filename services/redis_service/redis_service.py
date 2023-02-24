@@ -33,6 +33,10 @@ class RedisService:
         return normalized_data
 
     def lrem_list(self,key,element):
-        self.service.lrem(key,0,element)
+        normalized_data = json.loads(element)
+        serialized_data = json.dumps(normalized_data, separators=(',', ':'))
+
+        self.service.lrem(key,0,serialized_data)
     def clear_list(self, key):
+
         return self.service.delete(key)

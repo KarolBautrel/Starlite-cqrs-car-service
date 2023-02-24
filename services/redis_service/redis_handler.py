@@ -16,6 +16,7 @@ class RedisHandler:
     def remove_event_from_list(self, element):
 
         self.redis_service.lrem_list(RedisKeys.EVENTS.value, json.dumps(element))
+        print("Deleted")
 
     def publish_event(self, event):
         serialized_event = json.dumps(event, default=str)

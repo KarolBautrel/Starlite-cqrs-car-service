@@ -23,7 +23,7 @@ class CarBought(Base):
     created: DateTime = Column(DateTime, nullable=True)
 
 class CarCancelled(Base):
-    __tablename__ = "carBought"
+    __tablename__ = "carCancelled"
     id: Mapped[int] = Column(Integer, primary_key=True, autoincrement=True)
     car_id: Mapped[int] = Column(Integer, unique=True)
     created: DateTime = Column(DateTime, nullable=True)

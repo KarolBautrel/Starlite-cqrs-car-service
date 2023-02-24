@@ -13,7 +13,7 @@ class ReadModelChecker:
         self.order_read_model_service = OrderReadModelService()
         self.event_mapper = {
         "car": self.handle_car_event,
-        # "order": self.handle_order_event
+        "order.readmodel": self.handle_order_event
         }
     def check_events(self):
         events = self.redis_handler.check_events(RedisKeys.EVENTS.value)
@@ -21,10 +21,12 @@ class ReadModelChecker:
             print("No new events_storage")
             return
         for event in events:
-            routing_key = self.event_mapper.get(event.get("routing_key", None), None)
-            if routing_key in ["car"]:
-                print(f"Event found with routing: {routing_key}")
+            routing_key = self.event_mapper.get(event.get("routing_key", None),None)
+            if routing_key:
+                print(f"Event found with routing: {event}")
                 routing_key(event)
+                import pdb;
+               # pdb.set_trace()
                 self.redis_handler.remove_event_from_list(event)
     def handle_car_event(self, event):
         self.car_read_model_service.handle_event(event)
