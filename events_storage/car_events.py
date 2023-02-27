@@ -10,7 +10,7 @@ dto_factory = DTOFactory(plugins=[SQLAlchemyPlugin()])
 class CarCreated(Base):
     __tablename__ = "carCreated"
     id: Mapped[int] = Column(Integer, primary_key=True,autoincrement=True)
-    car_id: Mapped[int] = Column(Integer, unique=True)
+    car_id: Mapped[int] = Column(Integer)
     model: Mapped[str] = Column(String)
     name: Mapped[str] = Column(String)
     year: Mapped[int] = Column(Integer)
@@ -19,13 +19,13 @@ class CarCreated(Base):
 class CarBought(Base):
     __tablename__ = "carBought"
     id: Mapped[int] = Column(Integer, primary_key=True, autoincrement=True)
-    car_id: Mapped[int] = Column(Integer, unique=True)
+    car_id: Mapped[int] = Column(Integer)
     created: DateTime = Column(DateTime, nullable=True)
 
 class CarCancelled(Base):
     __tablename__ = "carCancelled"
     id: Mapped[int] = Column(Integer, primary_key=True, autoincrement=True)
-    car_id: Mapped[int] = Column(Integer, unique=True)
+    car_id: Mapped[int] = Column(Integer)
     created: DateTime = Column(DateTime, nullable=True)
 class CarPriceChanged(Base):
     __tablename__ = "CarPriceChanged"
